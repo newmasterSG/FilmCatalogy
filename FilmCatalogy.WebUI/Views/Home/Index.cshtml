@@ -1,0 +1,27 @@
+﻿@model List<FilmCatalogy.Application.Models.Films.FilmDTO>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table id="filmsTable" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Director</th>
+            <th>Release Date</th>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td>@film.Name</td>
+                <td>@film.Director</td>
+                <td>@film.Release.ToShortDateString()</td>
+                <td>@string.Join(", ", film.Categories.Select(c => c.Name))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,45 @@
+﻿@model FilmCatalogy.Application.Models.Films.FilmDTO
+@{
+    ViewData["Title"] = "Update Film";
+}
+
+<h1>Update Film</h1>
+
+@if(Model != null)
+{
+    <form id="filmForm"  asp-action="Update" asp-controller="Film" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Director" class="control-label"></label>
+            <input asp-for="Director" class="form-control" />
+            <span asp-validation-for="Director" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Release" class="control-label"></label>
+            <input asp-for="Release" class="form-control" type="date" />
+            <span asp-validation-for="Release" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Categories</label><br />
+            @foreach (var category in ViewBag.Categories)
+            {
+                var isChecked = Model.Categories.Any(c => c.Id == category.Id);
+                <input type="checkbox" name="CategoryIds" value="@category.Id" @(isChecked ? "checked" : "") />
+                <label>@category.Name</label>
+                <br />
+            }
+            <span asp-validation-for="Categories" class="text-danger"></span>
+        </div>
+
+        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
+    </form>
+}

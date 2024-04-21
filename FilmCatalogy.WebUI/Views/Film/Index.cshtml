@@ -1,0 +1,44 @@
+﻿@model List<FilmCatalogy.Application.Models.Films.FilmDTO>
+@{
+    ViewData["Title"] = "Film List";
+}
+
+<a class="navbar-brand" asp-area="" asp-controller="Film" asp-action="Add">Add</a>
+
+<h1>Film List</h1>
+
+<a asp-action="Create" class="btn btn-primary">Create New</a>
+
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Director</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var film in Model)
+                {
+                    <tr>
+                        <td>@film.Name</td>
+                        <td>@film.Director</td>
+                        <td>@film.Release.ToShortDateString()</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@film.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@film.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No films found.</p>
+}

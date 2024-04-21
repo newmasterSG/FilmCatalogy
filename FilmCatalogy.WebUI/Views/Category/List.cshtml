@@ -1,0 +1,21 @@
+﻿@model List<FilmCatalogy.Application.Models.Category.CategoryListDTO>
+
+<table id="categoriesTable" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number of Films</th>
+            <th>Nesting Level</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.NumberOfFilms</td>
+                <td>@category.NestingLevel</td>
+            </tr>
+        }
+    </tbody>
+</table>
